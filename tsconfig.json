@@ -3,11 +3,12 @@
         "src/index.ts"
     ],
     "compilerOptions": {
+    "downlevelIteration": true,
     "importHelpers": true,
         "rootDir": "./src",
         "outDir": "es2015",
-        "target": "es5",
-        "module": "es2015",
+        "target": "es2015",
+        "module": "esnext",
         "stripInternal": true,
         "lib": ["es6", "es2015", "dom"],
         "moduleResolution": "node",
