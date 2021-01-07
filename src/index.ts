@@ -246,11 +246,11 @@ function updateObject(chart: any, oldObj: any, newObj: any) {
   selector: "amCharts"
 })
 export class AmChartsDirective {
-  @Input() id: string;
+  @Input() id!: string;
   @Input() options: any; // TODO better type for this
   @Input() delay: number = 0;
 
-  private chart: AmChart;
+  private chart!: AmChart;
 
   constructor(private el: ElementRef, private AmCharts: AmChartsService, private zone: NgZone) {}
 

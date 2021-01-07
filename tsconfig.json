@@ -3,6 +3,7 @@
         "src/index.ts"
     ],
     "compilerOptions": {
+    "importHelpers": true,
         "rootDir": "./src",
         "outDir": "es2015",
         "target": "es5",

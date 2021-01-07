@@ -8,16 +8,34 @@
     }
 })(function (require, exports) {
     "use strict";
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+     */
     Object.defineProperty(exports, "__esModule", { value: true });
     var core_1 = require("@angular/core");
+    /**
+     * @param {?} x
+     * @return {?}
+     */
     function getType(x) {
         // TODO make this faster ?
         return {}.toString.call(x);
     }
+    /**
+     * @param {?} obj
+     * @param {?} key
+     * @return {?}
+     */
     function hasOwnKey(obj, key) {
         return {}.hasOwnProperty.call(obj, key);
     }
+    /**
+     * @param {?} x
+     * @return {?}
+     */
     function copyObject(x) {
+        /** @type {?} */
         var output = {};
         // TODO use Object.keys ?
         for (var key in x) {
@@ -27,16 +45,24 @@
         }
         return output;
     }
+    /**
+     * @param {?} x
+     * @return {?}
+     */
     function copyArray(x) {
+        /** @type {?} */
         var length = x.length;
+        /** @type {?} */
         var output = new Array(length);
         for (var i = 0; i < length; ++i) {
             output[i] = copy(x[i]);
         }
         return output;
     }
-    // TODO can this be made faster ?
-    // TODO what about regexps, etc. ?
+    /**
+     * @param {?} x
+     * @return {?}
+     */
     function copy(x) {
         switch (getType(x)) {
             case "[object Array]":
@@ -50,12 +76,27 @@
                 return x;
         }
     }
+    /**
+     * @param {?} x
+     * @return {?}
+     */
     function isNaN(x) {
         return x !== x;
     }
+    /**
+     * @param {?} x
+     * @param {?} y
+     * @return {?}
+     */
     function isNumberEqual(x, y) {
         return x === y || (isNaN(x) && isNaN(y));
     }
+    /**
+     * @param {?} chart
+     * @param {?} x
+     * @param {?} y
+     * @return {?}
+     */
     function removeChartListeners(chart, x, y) {
         if (x !== y) {
             // TODO is this necessary ?
@@ -66,13 +107,18 @@
             if (y == null) {
                 y = [];
             }
+            /** @type {?} */
             var xLength = x.length;
+            /** @type {?} */
             var yLength = y.length;
             for (var i = 0; i < xLength; ++i) {
+                /** @type {?} */
                 var xValue = x[i];
+                /** @type {?} */
                 var has = false;
                 // TODO make this faster ?
                 for (var j = 0; j < yLength; ++j) {
+                    /** @type {?} */
                     var yValue = y[j];
                     // TODO is this correct ?
                     if (xValue.event === yValue.event &&
@@ -88,10 +134,19 @@
             }
         }
     }
+    /**
+     * @param {?} a
+     * @param {?} x
+     * @param {?} y
+     * @return {?}
+     */
     function updateArray(a, x, y) {
+        /** @type {?} */
         var didUpdate = false;
         if (x !== y) {
+            /** @type {?} */
             var xLength = x.length;
+            /** @type {?} */
             var yLength = y.length;
             if (xLength !== yLength) {
                 a.length = yLength;
@@ -113,10 +168,20 @@
         }
         return didUpdate;
     }
+    /**
+     * @param {?} obj
+     * @param {?} key
+     * @param {?} x
+     * @param {?} y
+     * @return {?}
+     */
     function update(obj, key, x, y) {
+        /** @type {?} */
         var didUpdate = false;
         if (x !== y) {
+            /** @type {?} */
             var xType = getType(x);
+            /** @type {?} */
             var yType = getType(y);
             if (xType === yType) {
                 switch (xType) {
@@ -162,7 +227,14 @@
         }
         return didUpdate;
     }
+    /**
+     * @param {?} chart
+     * @param {?} oldObj
+     * @param {?} newObj
+     * @return {?}
+     */
     function updateObject(chart, oldObj, newObj) {
+        /** @type {?} */
         var didUpdate = false;
         if (oldObj !== newObj) {
             // TODO use Object.keys ?
@@ -199,46 +271,66 @@
         }
         return didUpdate;
     }
-    var AmChartsDirective = (function () {
+    var AmChartsDirective = /** @class */ (function () {
         function AmChartsDirective(el, AmCharts, zone) {
             this.el = el;
             this.AmCharts = AmCharts;
             this.zone = zone;
             this.delay = 0;
         }
-        AmChartsDirective.prototype.ngAfterViewInit = function () {
-            // AmCharts mutates the config object, so we have to make a deep copy to prevent that
+        /**
+         * @return {?}
+         */
+        AmChartsDirective.prototype.ngAfterViewInit = /**
+         * @return {?}
+         */
+        function () {
+            /** @type {?} */
             var props = copy(this.options);
+            /** @type {?} */
             var el = this.el.nativeElement;
             el.id = this.id;
             el.style.display = "block";
             this.chart = this.AmCharts.makeChart(this.id, props, this.delay);
         };
         // TODO is this correct ?
-        // TODO is this correct ?
-        AmChartsDirective.prototype.ngOnChanges = 
-        // TODO is this correct ?
+        /**
+         * @param {?} x
+         * @return {?}
+         */
+        AmChartsDirective.prototype.ngOnChanges = /**
+         * @param {?} x
+         * @return {?}
+         */
         function (x) {
             var _this = this;
+            /** @type {?} */
             var el = this.el.nativeElement;
-            if (x.id) {
-                el.id = x.id.currentValue;
+            if (x["id"]) {
+                el.id = x["id"].currentValue;
             }
-            if (x.options) {
+            if (x["options"]) {
                 // Update the chart after init
                 if (this.chart) {
                     // This is needed to avoid triggering ngDoCheck
                     this.zone.runOutsideAngular(function () {
-                        var didUpdate = updateObject(_this.chart, x.options.previousValue, x.options.currentValue);
+                        /** @type {?} */
+                        var didUpdate = updateObject(_this.chart, x["options"].previousValue, x["options"].currentValue);
                         // TODO make this faster
                         if (didUpdate) {
-                            _this.chart.validateNow(true);
+                            _this.chart["validateNow"](true);
                         }
                     });
                 }
             }
         };
-        AmChartsDirective.prototype.ngOnDestroy = function () {
+        /**
+         * @return {?}
+         */
+        AmChartsDirective.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+        function () {
             if (this.chart) {
                 this.AmCharts.destroyChart(this.chart);
             }
@@ -250,105 +342,196 @@
         ];
         /** @nocollapse */
         AmChartsDirective.ctorParameters = function () { return [
-            { type: core_1.ElementRef, },
-            { type: AmChartsService, },
-            { type: core_1.NgZone, },
+            { type: core_1.ElementRef },
+            { type: AmChartsService },
+            { type: core_1.NgZone }
         ]; };
         AmChartsDirective.propDecorators = {
-            "id": [{ type: core_1.Input },],
-            "options": [{ type: core_1.Input },],
-            "delay": [{ type: core_1.Input },],
+            id: [{ type: core_1.Input }],
+            options: [{ type: core_1.Input }],
+            delay: [{ type: core_1.Input }]
         };
         return AmChartsDirective;
     }());
     exports.AmChartsDirective = AmChartsDirective;
-    var AmChartsService = (function () {
+    if (false) {
+        /** @type {?} */
+        AmChartsDirective.prototype.id;
+        /** @type {?} */
+        AmChartsDirective.prototype.options;
+        /** @type {?} */
+        AmChartsDirective.prototype.delay;
+        /** @type {?} */
+        AmChartsDirective.prototype.chart;
+        /** @type {?} */
+        AmChartsDirective.prototype.el;
+        /** @type {?} */
+        AmChartsDirective.prototype.AmCharts;
+        /** @type {?} */
+        AmChartsDirective.prototype.zone;
+    }
+    /**
+     * @record
+     */
+    function AmChart() { }
+    exports.AmChart = AmChart;
+    /**
+     * @record
+     */
+    function AmEvent() { }
+    exports.AmEvent = AmEvent;
+    /**
+     * @record
+     */
+    function Formatter() { }
+    exports.Formatter = Formatter;
+    /** @type {?} */
+    Formatter.prototype.precision;
+    /** @type {?} */
+    Formatter.prototype.decimalSeparator;
+    /** @type {?} */
+    Formatter.prototype.thousandsSeparator;
+    var AmChartsService = /** @class */ (function () {
         function AmChartsService(zone) {
             this.zone = zone;
         }
         Object.defineProperty(AmChartsService.prototype, "StockPanel", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.StockPanel;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "StockGraph", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.StockGraph;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "StockEvent", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.StockEvent;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "StockLegend", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.StockLegend;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "baseHref", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.baseHref;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.baseHref = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "useUTC", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.useUTC;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.useUTC = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "dayNames", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.dayNames;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.dayNames = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "monthNames", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.monthNames;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.monthNames = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "shortDayNames", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.shortDayNames;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.shortDayNames = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "shortMonthNames", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.shortMonthNames;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.shortMonthNames = v;
             },
             enumerable: true,
@@ -356,14 +539,17 @@
         });
         Object.defineProperty(AmChartsService.prototype, "theme", {
             // TODO better type for this
-            get: 
-            // TODO better type for this
+            get: /**
+             * @return {?}
+             */
             function () {
                 return AmCharts.theme;
             },
             // TODO better type for this
-            set: 
-            // TODO better type for this
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
             function (v) {
                 AmCharts.theme = v;
             },
@@ -371,81 +557,191 @@
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "processDelay", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.processDelay;
             },
-            set: function (v) {
+            set: /**
+             * @param {?} v
+             * @return {?}
+             */
+            function (v) {
                 AmCharts.processDelay = v;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(AmChartsService.prototype, "charts", {
-            get: function () {
+            get: /**
+             * @return {?}
+             */
+            function () {
                 return AmCharts.charts;
             },
             enumerable: true,
             configurable: true
         });
-        AmChartsService.prototype.addInitHandler = function (handler, types) {
+        /**
+         * @param {?} handler
+         * @param {?=} types
+         * @return {?}
+         */
+        AmChartsService.prototype.addInitHandler = /**
+         * @param {?} handler
+         * @param {?=} types
+         * @return {?}
+         */
+        function (handler, types) {
             // TODO use this.zone.runOutsideAngular ?
             AmCharts.addInitHandler(handler, types);
         };
-        AmChartsService.prototype.addPrefix = function (value, prefixesBig, prefixesSmall, numberFormatter) {
+        /**
+         * @param {?} value
+         * @param {?} prefixesBig
+         * @param {?} prefixesSmall
+         * @param {?} numberFormatter
+         * @return {?}
+         */
+        AmChartsService.prototype.addPrefix = /**
+         * @param {?} value
+         * @param {?} prefixesBig
+         * @param {?} prefixesSmall
+         * @param {?} numberFormatter
+         * @return {?}
+         */
+        function (value, prefixesBig, prefixesSmall, numberFormatter) {
             // TODO use this.zone.runOutsideAngular ?
             return AmCharts.addPrefix(value, prefixesBig, prefixesSmall, numberFormatter);
         };
-        AmChartsService.prototype.clear = function () {
+        /**
+         * @return {?}
+         */
+        AmChartsService.prototype.clear = /**
+         * @return {?}
+         */
+        function () {
             // TODO use this.zone.runOutsideAngular ?
             AmCharts.clear();
         };
-        AmChartsService.prototype.formatDate = function (date, format) {
+        /**
+         * @param {?} date
+         * @param {?} format
+         * @return {?}
+         */
+        AmChartsService.prototype.formatDate = /**
+         * @param {?} date
+         * @param {?} format
+         * @return {?}
+         */
+        function (date, format) {
             // TODO use this.zone.runOutsideAngular ?
             return AmCharts.formatDate(date, format);
         };
-        AmChartsService.prototype.formatNumber = function (number, formatter, zeroCount) {
+        /**
+         * @param {?} number
+         * @param {?} formatter
+         * @param {?} zeroCount
+         * @return {?}
+         */
+        AmChartsService.prototype.formatNumber = /**
+         * @param {?} number
+         * @param {?} formatter
+         * @param {?} zeroCount
+         * @return {?}
+         */
+        function (number, formatter, zeroCount) {
             // TODO use this.zone.runOutsideAngular ?
             return AmCharts.formatNumber(number, formatter, zeroCount);
         };
-        AmChartsService.prototype.stringToDate = function (string, format) {
+        /**
+         * @param {?} string
+         * @param {?} format
+         * @return {?}
+         */
+        AmChartsService.prototype.stringToDate = /**
+         * @param {?} string
+         * @param {?} format
+         * @return {?}
+         */
+        function (string, format) {
             // TODO use this.zone.runOutsideAngular ?
             return AmCharts.stringToDate(string, format);
         };
         // TODO is Node the correct type ?
         // TODO better type for config
-        // TODO is Node the correct type ?
-        // TODO better type for config
-        AmChartsService.prototype.makeChart = 
-        // TODO is Node the correct type ?
-        // TODO better type for config
+        /**
+         * @param {?} id
+         * @param {?} config
+         * @param {?=} delay
+         * @return {?}
+         */
+        AmChartsService.prototype.makeChart = /**
+         * @param {?} id
+         * @param {?} config
+         * @param {?=} delay
+         * @return {?}
+         */
         function (id, config, delay) {
             return this.zone.runOutsideAngular(function () { return AmCharts.makeChart(id, config, delay); });
         };
-        AmChartsService.prototype.addListener = function (chart, type, fn) {
+        /**
+         * @param {?} chart
+         * @param {?} type
+         * @param {?} fn
+         * @return {?}
+         */
+        AmChartsService.prototype.addListener = /**
+         * @param {?} chart
+         * @param {?} type
+         * @param {?} fn
+         * @return {?}
+         */
+        function (chart, type, fn) {
             var _this = this;
+            /** @type {?} */
             var callback = function (e) {
                 _this.zone.run(function () {
                     fn(e);
                 });
             };
             this.zone.runOutsideAngular(function () {
-                chart.addListener(type, callback);
+                chart["addListener"](type, callback);
             });
             return function () {
                 _this.zone.runOutsideAngular(function () {
-                    chart.removeListener(chart, type, callback);
+                    chart["removeListener"](chart, type, callback);
                 });
             };
         };
-        AmChartsService.prototype.updateChart = function (chart, fn) {
+        /**
+         * @param {?} chart
+         * @param {?} fn
+         * @return {?}
+         */
+        AmChartsService.prototype.updateChart = /**
+         * @param {?} chart
+         * @param {?} fn
+         * @return {?}
+         */
+        function (chart, fn) {
             this.zone.runOutsideAngular(function () {
                 fn();
-                chart.validateNow(true);
+                chart["validateNow"](true);
             });
         };
-        AmChartsService.prototype.destroyChart = function (chart) {
+        /**
+         * @param {?} chart
+         * @return {?}
+         */
+        AmChartsService.prototype.destroyChart = /**
+         * @param {?} chart
+         * @return {?}
+         */
+        function (chart) {
             this.zone.runOutsideAngular(function () {
-                chart.clear();
+                chart["clear"]();
             });
         };
         AmChartsService.decorators = [
@@ -453,12 +749,16 @@
         ];
         /** @nocollapse */
         AmChartsService.ctorParameters = function () { return [
-            { type: core_1.NgZone, },
+            { type: core_1.NgZone }
         ]; };
         return AmChartsService;
     }());
     exports.AmChartsService = AmChartsService;
-    var AmChartsModule = (function () {
+    if (false) {
+        /** @type {?} */
+        AmChartsService.prototype.zone;
+    }
+    var AmChartsModule = /** @class */ (function () {
         function AmChartsModule() {
         }
         AmChartsModule.decorators = [
@@ -474,8 +774,6 @@
                         ]
                     },] },
         ];
-        /** @nocollapse */
-        AmChartsModule.ctorParameters = function () { return []; };
         return AmChartsModule;
     }());
     exports.AmChartsModule = AmChartsModule;

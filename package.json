@@ -12,15 +12,19 @@
   "scripts": {
     "build": "ngc --project tsconfig.json && ngc --project tsconfig-umd.json"
   },
-  "peerDependencies": {
-    "@angular/core": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
-    "@angular/compiler": "^5.0.2",
-    "@angular/compiler-cli": "^5.0.2",
-    "@angular/core": "^5.0.2",
-    "rxjs": "^5.5.2",
-    "typescript": "~2.4.2",
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular/compiler": "^7.2.16",
+    "@angular/compiler-cli": "^7.2.16",
+    "@angular/core": "^7.2.16",
+    "rxjs": "^6.6.3",
+    "tsickle": "^0.32.1",
+    "typescript": "~3.2.4",
     "zone.js": "^0.8.18"
+  },
+  "dependencies": {
+    "@angular/cli": "^7.3.10",
+    "tslib": "^1.9.0"
   }
 }

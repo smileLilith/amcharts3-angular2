@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
  */
 import { Directive, ElementRef, Input, NgZone, NgModule, Injectable } from "@angular/core";
 /**
@@ -24,9 +24,10 @@ function hasOwnKey(obj, key) {
  * @return {?}
  */
 function copyObject(x) {
-    var /** @type {?} */ output = {};
+    /** @type {?} */
+    var output = {};
     // TODO use Object.keys ?
-    for (var /** @type {?} */ key in x) {
+    for (var key in x) {
         if (hasOwnKey(x, key)) {
             output[key] = copy(x[key]);
         }
@@ -38,9 +39,11 @@ function copyObject(x) {
  * @return {?}
  */
 function copyArray(x) {
-    var /** @type {?} */ length = x.length;
-    var /** @type {?} */ output = new Array(length);
-    for (var /** @type {?} */ i = 0; i < length; ++i) {
+    /** @type {?} */
+    var length = x.length;
+    /** @type {?} */
+    var output = new Array(length);
+    for (var i = 0; i < length; ++i) {
         output[i] = copy(x[i]);
     }
     return output;
@@ -93,14 +96,19 @@ function removeChartListeners(chart, x, y) {
         if (y == null) {
             y = [];
         }
-        var /** @type {?} */ xLength = x.length;
-        var /** @type {?} */ yLength = y.length;
-        for (var /** @type {?} */ i = 0; i < xLength; ++i) {
-            var /** @type {?} */ xValue = x[i];
-            var /** @type {?} */ has = false;
+        /** @type {?} */
+        var xLength = x.length;
+        /** @type {?} */
+        var yLength = y.length;
+        for (var i = 0; i < xLength; ++i) {
+            /** @type {?} */
+            var xValue = x[i];
+            /** @type {?} */
+            var has = false;
             // TODO make this faster ?
-            for (var /** @type {?} */ j = 0; j < yLength; ++j) {
-                var /** @type {?} */ yValue = y[j];
+            for (var j = 0; j < yLength; ++j) {
+                /** @type {?} */
+                var yValue = y[j];
                 // TODO is this correct ?
                 if (xValue.event === yValue.event &&
                     xValue.method === yValue.method) {
@@ -122,15 +130,18 @@ function removeChartListeners(chart, x, y) {
  * @return {?}
  */
 function updateArray(a, x, y) {
-    var /** @type {?} */ didUpdate = false;
+    /** @type {?} */
+    var didUpdate = false;
     if (x !== y) {
-        var /** @type {?} */ xLength = x.length;
-        var /** @type {?} */ yLength = y.length;
+        /** @type {?} */
+        var xLength = x.length;
+        /** @type {?} */
+        var yLength = y.length;
         if (xLength !== yLength) {
             a.length = yLength;
             didUpdate = true;
         }
-        for (var /** @type {?} */ i = 0; i < yLength; ++i) {
+        for (var i = 0; i < yLength; ++i) {
             if (i < xLength) {
                 if (update(a, i, x[i], y[i])) {
                     didUpdate = true;
@@ -154,10 +165,13 @@ function updateArray(a, x, y) {
  * @return {?}
  */
 function update(obj, key, x, y) {
-    var /** @type {?} */ didUpdate = false;
+    /** @type {?} */
+    var didUpdate = false;
     if (x !== y) {
-        var /** @type {?} */ xType = getType(x);
-        var /** @type {?} */ yType = getType(y);
+        /** @type {?} */
+        var xType = getType(x);
+        /** @type {?} */
+        var yType = getType(y);
         if (xType === yType) {
             switch (xType) {
                 case "[object Array]":
@@ -209,10 +223,11 @@ function update(obj, key, x, y) {
  * @return {?}
  */
 function updateObject(chart, oldObj, newObj) {
-    var /** @type {?} */ didUpdate = false;
+    /** @type {?} */
+    var didUpdate = false;
     if (oldObj !== newObj) {
         // TODO use Object.keys ?
-        for (var /** @type {?} */ key in newObj) {
+        for (var key in newObj) {
             if (hasOwnKey(newObj, key)) {
                 // TODO make this faster ?
                 if (hasOwnKey(oldObj, key)) {
@@ -233,7 +248,7 @@ function updateObject(chart, oldObj, newObj) {
             }
         }
         // TODO use Object.keys ?
-        for (var /** @type {?} */ key in oldObj) {
+        for (var key in oldObj) {
             if (hasOwnKey(oldObj, key) && !hasOwnKey(newObj, key)) {
                 if (key === "listeners") {
                     removeChartListeners(chart, oldObj[key], []);
@@ -245,7 +260,7 @@ function updateObject(chart, oldObj, newObj) {
     }
     return didUpdate;
 }
-var AmChartsDirective = (function () {
+var AmChartsDirective = /** @class */ (function () {
     function AmChartsDirective(el, AmCharts, zone) {
         this.el = el;
         this.AmCharts = AmCharts;
@@ -259,9 +274,10 @@ var AmChartsDirective = (function () {
      * @return {?}
      */
     function () {
-        // AmCharts mutates the config object, so we have to make a deep copy to prevent that
-        var /** @type {?} */ props = copy(this.options);
-        var /** @type {?} */ el = this.el.nativeElement;
+        /** @type {?} */
+        var props = copy(this.options);
+        /** @type {?} */
+        var el = this.el.nativeElement;
         el.id = this.id;
         el.style.display = "block";
         this.chart = this.AmCharts.makeChart(this.id, props, this.delay);
@@ -277,7 +293,8 @@ var AmChartsDirective = (function () {
      */
     function (x) {
         var _this = this;
-        var /** @type {?} */ el = this.el.nativeElement;
+        /** @type {?} */
+        var el = this.el.nativeElement;
         if (x["id"]) {
             el.id = x["id"].currentValue;
         }
@@ -286,7 +303,8 @@ var AmChartsDirective = (function () {
             if (this.chart) {
                 // This is needed to avoid triggering ngDoCheck
                 this.zone.runOutsideAngular(function () {
-                    var /** @type {?} */ didUpdate = updateObject(_this.chart, x["options"].previousValue, x["options"].currentValue);
+                    /** @type {?} */
+                    var didUpdate = updateObject(_this.chart, x["options"].previousValue, x["options"].currentValue);
                     // TODO make this faster
                     if (didUpdate) {
                         _this.chart["validateNow"](true);
@@ -313,28 +331,19 @@ var AmChartsDirective = (function () {
     ];
     /** @nocollapse */
     AmChartsDirective.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: AmChartsService, },
-        { type: NgZone, },
+        { type: ElementRef },
+        { type: AmChartsService },
+        { type: NgZone }
     ]; };
     AmChartsDirective.propDecorators = {
-        "id": [{ type: Input },],
-        "options": [{ type: Input },],
-        "delay": [{ type: Input },],
+        id: [{ type: Input }],
+        options: [{ type: Input }],
+        delay: [{ type: Input }]
     };
     return AmChartsDirective;
 }());
 export { AmChartsDirective };
-function AmChartsDirective_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    AmChartsDirective.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    AmChartsDirective.ctorParameters;
-    /** @type {!Object<string,!Array<{type: !Function, args: (undefined|!Array<?>)}>>} */
-    AmChartsDirective.propDecorators;
+if (false) {
     /** @type {?} */
     AmChartsDirective.prototype.id;
     /** @type {?} */
@@ -354,33 +363,21 @@ function AmChartsDirective_tsickle_Closure_declarations() {
  * @record
  */
 export function AmChart() { }
-function AmChart_tsickle_Closure_declarations() {
-    /* TODO: handle strange member:
-    [key: string]: any;
-    */
-}
 /**
  * @record
  */
 export function AmEvent() { }
-function AmEvent_tsickle_Closure_declarations() {
-    /* TODO: handle strange member:
-    [key: string]: any;
-    */
-}
 /**
  * @record
  */
 export function Formatter() { }
-function Formatter_tsickle_Closure_declarations() {
-    /** @type {?} */
-    Formatter.prototype.precision;
-    /** @type {?} */
-    Formatter.prototype.decimalSeparator;
-    /** @type {?} */
-    Formatter.prototype.thousandsSeparator;
-}
-var AmChartsService = (function () {
+/** @type {?} */
+Formatter.prototype.precision;
+/** @type {?} */
+Formatter.prototype.decimalSeparator;
+/** @type {?} */
+Formatter.prototype.thousandsSeparator;
+var AmChartsService = /** @class */ (function () {
     function AmChartsService(zone) {
         this.zone = zone;
     }
@@ -689,7 +686,8 @@ var AmChartsService = (function () {
      */
     function (chart, type, fn) {
         var _this = this;
-        var /** @type {?} */ callback = function (e) {
+        /** @type {?} */
+        var callback = function (e) {
             _this.zone.run(function () {
                 fn(e);
             });
@@ -737,23 +735,16 @@ var AmChartsService = (function () {
     ];
     /** @nocollapse */
     AmChartsService.ctorParameters = function () { return [
-        { type: NgZone, },
+        { type: NgZone }
     ]; };
     return AmChartsService;
 }());
 export { AmChartsService };
-function AmChartsService_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    AmChartsService.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    AmChartsService.ctorParameters;
+if (false) {
     /** @type {?} */
     AmChartsService.prototype.zone;
 }
-var AmChartsModule = (function () {
+var AmChartsModule = /** @class */ (function () {
     function AmChartsModule() {
     }
     AmChartsModule.decorators = [
@@ -769,18 +760,7 @@ var AmChartsModule = (function () {
                     ]
                 },] },
     ];
-    /** @nocollapse */
-    AmChartsModule.ctorParameters = function () { return []; };
     return AmChartsModule;
 }());
 export { AmChartsModule };
-function AmChartsModule_tsickle_Closure_declarations() {
-    /** @type {!Array<{type: !Function, args: (undefined|!Array<?>)}>} */
-    AmChartsModule.decorators;
-    /**
-     * @nocollapse
-     * @type {function(): !Array<(null|{type: ?, decorators: (undefined|!Array<{type: !Function, args: (undefined|!Array<?>)}>)})>}
-     */
-    AmChartsModule.ctorParameters;
-}
 //# sourceMappingURL=index.js.map
